@@ -1,7 +1,6 @@
 import java.io.*;
 import java.util.*;
 import com.google.gson.*;
-
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.User;
@@ -17,13 +16,20 @@ import org.jetbrains.annotations.NotNull;
 
 
 public class EventListener extends ListenerAdapter {
-    private static final String FILE_NAME = "C:\\Users\\aaron\\OneDrive\\Desktop\\JavaDiscordBot\\src\\main\\java\\counts.json";
+    private static String FILE_NAME;
     public static Bot aaBot;
     public static HashMap<String, Integer> userStores = new HashMap<>();
     public static String[] brainrot = {"rizz", "skibidi", "gyatt", "sigma", "fanum", "tuah", "goon", "ohio", "low taper fade", "maxing", "balkan", "winter arc"};
 
     @Override
     public void onReady(@NotNull ReadyEvent event) {
+        try {
+            File file = new File("src/main/counts.json");
+            file.createNewFile();
+            FILE_NAME = file.getAbsolutePath();
+        } catch (IOException e){
+            System.err.println("An error occurred while creating the file: "+ e.getMessage());
+        }
         try (Reader reader = new FileReader(FILE_NAME)) {
             Map data = new Gson().fromJson(reader, Map.class);
             if (data != null) {
@@ -41,6 +47,8 @@ public class EventListener extends ListenerAdapter {
             }
         } catch (FileNotFoundException e) {
             System.out.println("Data file not found, starting fresh.");
+
+
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
