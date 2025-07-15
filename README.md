@@ -1,0 +1,1 @@
+The main feature added to this bot so far is the ability to track the amount of brainrot words each user in a server says. Includes brainrot leaderboard command, which lists users with most brainrot words said. New features may be added in the future.
