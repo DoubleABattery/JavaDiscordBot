@@ -28,10 +28,21 @@ public class CommandManager extends ListenerAdapter {
                 OptionMapping messageOption = event.getOption("user");
                 if (messageOption != null){
                     User messageUser = messageOption.getAsUser();
-                    event.reply("**"+messageUser.getName()+"** has said a total of **" + EventListener.userStores.get(messageUser.getId()) + "** brainrot words.").queue();
+                    int userCount = EventListener.userStores.get(messageUser.getId());
+                    if (userCount == 1){
+                        event.reply("**"+messageUser.getName()+"** has said a total of **" + userCount + "** brainrot word.").queue();
+                    }
+                    else{
+                        event.reply("**"+messageUser.getName()+"** has said a total of **" + userCount + "** brainrot words.").queue();
+                    }
 
                 } else {
-                    event.reply("You have said a total of **" + EventListener.userStores.get(user.getId()) + "** brainrot words.").queue();
+                    int userCount = EventListener.userStores.get(user.getId());
+                    if (userCount == 1){
+                        event.reply("You have said a total of **" + userCount + "** brainrot word.").queue();
+                    } else {
+                        event.reply("You have said a total of **" + userCount + "** brainrot words.").queue();
+                    }
                 }
             }
 
